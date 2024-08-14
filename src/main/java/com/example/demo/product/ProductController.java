@@ -3,6 +3,7 @@ package com.example.demo.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,13 +26,13 @@ public class ProductController {
     //받고 싶은거 ? 상품
 
     @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
-    public String findProduct(@PathVariable("id") int id) {
+    public Product findProduct(@PathVariable("id") int id) {
         return productService.findProduct(id);
     }
 
     @PostMapping(value = "/save")
-    public String save(@RequestParam(value = "name") String productName) {
-        productService.save(productName);
+    public String save(@RequestBody Product product) {
+        productService.save(product);
         return "save completed";
     }
 
